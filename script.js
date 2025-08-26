@@ -1,30 +1,65 @@
-async function loadLinks() {
-  const res = await fetch('data/links.json');
-  const data = await res.json();
-  const container = document.getElementById('links-container');
-  const search = document.getElementById('search');
-  
-  function render(filter='') {
-    container.innerHTML = '';
-    Object.keys(data).forEach(category => {
-      let section = document.createElement('section');
-      let title = document.createElement('h2');
-      title.textContent = category;
-      section.appendChild(title);
-      data[category].forEach(link => {
-        if (link.title.toLowerCase().includes(filter.toLowerCase())) {
-          let card = document.createElement('div');
-          card.className = 'card';
-          card.innerHTML = `<a href="${link.url}" target="_blank" rel="noopener">
-              ${link.title}</a><p>${link.desc || ''}</p>`;
-          section.appendChild(card);
-        }
-      });
-      container.appendChild(section);
-    });
-  }
-  
-  render();
-  search.addEventListener('input', e => render(e.target.value));
+// app.js — module
+script.async = true;
+document.head.appendChild(script);
+
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){window.dataLayer.push(arguments)}
+gtag('js', new Date());
+gtag('config', id);
+console.log('GA4 enabled', id);
 }
-document.addEventListener('DOMContentLoaded', loadLinks);
+}catch(e){console.warn('GA init failed', e)}
+}
+
+
+function render(){
+const out = el('#content');
+out.innerHTML = '';
+const categories = state.data?.categories || [];
+
+
+categories.forEach(cat => {
+// filter links by query
+const filtered = cat.links.filter(l => matchesQuery(l));
+if(filtered.length === 0) return;
+
+
+const section = createEl('section',{class:'category','aria-label': cat[`title_${state.lang}`]});
+const h = createEl('h2',{}, cat[`title_${state.lang}`]);
+section.appendChild(h);
+
+
+if(state.view === 'grid'){
+const grid = createEl('div',{class:'grid'});
+filtered.forEach(link => grid.appendChild(cardFor(link)));
+section.appendChild(grid);
+}else{
+const list = createEl('div',{class:'list'});
+filtered.forEach(link => list.appendChild(listItemFor(link)));
+section.appendChild(list);
+}
+
+
+out.appendChild(section);
+});
+}
+
+
+function matchesQuery(link){
+if(!state.query) return true;
+const q = state.query;
+const fields = [link[`title_${state.lang}`], link[`desc_${state.lang}`] || '', link.title_id, link.title_en];
+return fields.join(' ').toLowerCase().includes(q);
+}
+
+
+function cardFor(link){
+const c = createEl('div',{class:'card'});
+const iconWrap = createEl('div',{class:'icon'});
+iconWrap.innerHTML = getIconSVG(link.icon);
+c.appendChild(iconWrap);
+
+
+const meta = createEl('div',{class:'meta'});
+const title = createEl('h3',{},
