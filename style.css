@@ -1,46 +1,92 @@
 body {
-  font-family: 'Poppins', sans-serif;
-  background: #f9f9f9;
+  font-family: 'Roboto Slab', serif;
   margin: 0;
   padding: 0;
+  background: #f7fafc;
   color: #0A5A75;
-  text-align: center;
 }
+
 .hero {
-  padding: 2rem;
+  text-align: center;
+  padding: 2rem 1rem;
+  background: #0A5A75;
+  color: white;
 }
+
 .logo {
-  width: 80px;
+  width: 100px;
   margin-bottom: 1rem;
 }
-#search {
-  margin-top: 1rem;
-  padding: 0.5rem;
-  width: 60%;
-  border: 1px solid #ccc;
+
+h1 {
+  margin: 0.5rem 0;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.search-container {
+  text-align: center;
+  margin: 1.5rem;
+}
+
+#searchInput {
+  width: 80%;
+  max-width: 400px;
+  padding: 0.6rem;
+  border: 2px solid #0A5A75;
   border-radius: 8px;
+  font-size: 1rem;
 }
-.card {
-  background: #fff;
-  border-radius: 12px;
+
+.category {
+  margin: 2rem 0;
+}
+
+.category h2 {
+  border-left: 5px solid #0A5A75;
+  padding-left: 10px;
+  font-size: 1.2rem;
+}
+
+.link-card {
+  display: flex;
+  align-items: center;
+  background: white;
+  margin: 0.7rem auto;
   padding: 1rem;
-  margin: 1rem auto;
-  width: 90%;
-  max-width: 500px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: transform 0.2s;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  max-width: 600px;
+  transition: transform 0.2s ease;
 }
-.card:hover {
-  transform: translateY(-3px);
+
+.link-card:hover {
+  transform: scale(1.02);
 }
-.card a {
-  text-decoration: none;
+
+.link-icon {
+  width: 36px;
+  height: 36px;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.link-content h3 {
+  margin: 0;
+  font-size: 1.1rem;
   color: #0A5A75;
-  font-weight: bold;
 }
-footer {
-  padding: 2rem;
+
+.link-content p {
+  margin: 0.2rem 0 0;
   font-size: 0.9rem;
-  background: #eee;
-  margin-top: 2rem;
+  color: #444;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #0A5A75;
+  color: white;
+  font-size: 0.85rem;
 }
